@@ -9,17 +9,15 @@ var contatos = [
 
 module.exports = function() {
     var controller = {};
-    controller.listaContatos = function(req, res) {
+    controller.listaContatos = (req, res) => {
         res.json(contatos);
     };
-    controller.obtemContato = function(req, res) {
+    controller.obtemContato = (req, res) => {
         var idContato = req.params.id;
-        var contato = contatos.filter(function(contato) {
+        var contato = contatos.filter((contato) => {
             return contato._id == idContato;
         })[0];
-        contato ?
-        res.json(contato) :
-        res.status(404).send('Contato não encontrado');
+        contato ? res.json(contato) : res.status(404).send('Contato não encontrado');
     };
     return controller;
 };
